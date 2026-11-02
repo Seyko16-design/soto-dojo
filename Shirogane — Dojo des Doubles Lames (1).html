@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SŌTŌ DŌJŌ — Dojo de la double lame</title>
+<style>
+:root {
+  --site-primary: #7139a8;
+  --site-on-primary: #ffffff;
+  --site-secondary: #101321;
+  --site-on-secondary: #f5f0e9;
+  --site-background: #080911;
+  --site-on-background: #f5f0e9;
+  --site-font-body: 'Trebuchet MS', Arial, sans-serif;
+  --site-font-heading: Georgia, 'Times New Roman', serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --surface: #111321;
+  --muted: #b8b4c5;
+  --line: rgba(190,151,235,.2);
+  --gold: #b58be5;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--site-background); color: var(--site-on-background); font-family: var(--site-font-body); }
+#app { min-height: 100vh; width: 100%; border-radius: 0; overflow: hidden; background-color: var(--site-background); color: var(--site-on-background); }
+h1,h2,h3,.brand { font-family: var(--site-font-heading); }
+.nav { display:flex; align-items:center; justify-content:space-between; padding: calc(17px * var(--site-spacing-scale)) clamp(20px,6.4vw,110px); border-bottom:1px solid var(--line); background:#090811; position:absolute; z-index:5; width:100%; min-height:58px; }
+.brand { font-size:1rem; letter-spacing:.18em; text-transform:uppercase; }
+.brand span { color:var(--gold); }
+.nav-links { display:flex; gap:27px; align-items:center; }
+a { color:inherit; text-decoration:none; }
+.nav-links a { color:#d1ccda; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; }
+.nav-links a:hover { color:var(--gold); }
+.menu { display:none; background:none; border:1px solid var(--line); color:inherit; padding:9px 12px; }
+.hero { min-height:790px; display:grid; align-items:center; position:relative; padding:150px clamp(22px,9.4vw,162px) 90px; overflow:hidden; background:radial-gradient(ellipse at 78% 58%,rgba(0,150,218,.22),transparent 34%),radial-gradient(ellipse at 67% 72%,rgba(126,35,173,.18),transparent 30%),linear-gradient(90deg,#080811 0%,rgba(8,8,18,.97) 28%,rgba(8,10,24,.72) 58%,rgba(5,13,29,.56) 100%),repeating-linear-gradient(90deg,transparent 0 8%,rgba(44,104,158,.08) 8.1% 8.3%,transparent 8.4% 16%),linear-gradient(180deg,#10172c,#07101e 72%,#080911); }
+.hero:before { content:' '; position:absolute; inset:0; pointer-events:none; opacity:var(--site-decoration-opacity); background:linear-gradient(180deg,rgba(7,7,15,.2),transparent 48%,#080911 100%),repeating-linear-gradient(90deg,transparent 0 13%,rgba(28,103,150,.11) 13.1% 13.35%,transparent 13.5% 26%),radial-gradient(ellipse at 83% 55%,rgba(0,174,220,.22),transparent 5%),radial-gradient(ellipse at 92% 62%,rgba(156,34,168,.18),transparent 8%); }
+.hero-inner { max-width:720px; position:relative; z-index:1; }
+.eyebrow { color:#76c8f0; letter-spacing:.34em; text-transform:uppercase; font-size:.68rem; }
+h1 { font-size:clamp(3.4rem,7.2vw,6rem); line-height:1.02; font-weight:400; margin:25px 0; letter-spacing:-.035em; text-transform:uppercase; }
+h1 em { color:var(--gold); font-style:normal; }
+.hero p { max-width:530px; color:#c9c3c0; line-height:1.8; font-size:1.04rem; }
+.actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:34px; }
+.btn { display:inline-block; padding:15px 23px; border:1px solid var(--gold); text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; cursor:pointer; transition:.2s; }
+.btn.primary { background:var(--site-primary); border-color:#a779d8; color:white; }
+.btn:hover { transform:translateY(-2px); filter:brightness(1.2); }
+.seal { display:none; }
+.seal strong { font:2.4rem Georgia,serif; display:block; }
+section { padding:100px clamp(22px,9vw,130px); }
+.section-head { max-width:700px; margin-bottom:48px; }
+.section-head h2 { font-size:clamp(2.4rem,5vw,4rem); font-weight:400; margin:12px 0; }
+.section-head p { color:var(--muted); line-height:1.8; }
+.about { background:#121620; display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+.art-panel { min-height:390px; background:linear-gradient(145deg,rgba(116,31,45,.72),rgba(23,27,37,.2)), repeating-linear-gradient(135deg,transparent 0 30px,rgba(255,255,255,.035) 31px 32px); border:1px solid var(--line); display:grid; place-items:center; position:relative; overflow:hidden; }
+.art-panel:before,.art-panel:after { content:''; position:absolute; width:2px; height:130%; background:linear-gradient(transparent,var(--gold),transparent); transform:rotate(34deg); opacity:.65; }
+.art-panel:after { transform:rotate(-34deg); }
+.swords { z-index:1; font:clamp(5rem,12vw,9rem) Georgia,serif; color:#e4d4b4; text-shadow:0 8px 35px #000; }
+.about-copy h2 { font-size:clamp(2.5rem,5vw,4rem); font-weight:400; margin:14px 0 20px; }
+.about-copy p { color:var(--muted); line-height:1.9; }
+.stats { display:flex; gap:38px; margin-top:30px; }
+.stat strong { display:block; color:var(--gold); font:2rem Georgia,serif; }
+.stat small { color:var(--muted); text-transform:uppercase; letter-spacing:.12em; font-size:.65rem; }
+.training { background:#08070e; }
+.cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.card { background:#14111d; padding:30px; border:1px solid #30213e; min-height:225px; transition:.25s; }
+.card:hover { border-color:var(--gold); transform:translateY(-5px); }
+.card .num { color:#d6a34f; font:2rem Georgia,serif; }
+.card h3 { color:#b47bea; font-size:1.35rem; font-weight:400; margin:20px 0 10px; }
+.card p { color:#b9b1c9; line-height:1.9; font-size:.92rem; }
+.code { background:#08070e; text-align:left; }
+.code h2 { color:#d6a34f; font-size:clamp(2.1rem,4vw,3rem); font-weight:400; margin:12px 0 20px; }
+.code p { max-width:850px; margin:0; color:var(--muted); line-height:1.8; }
+.rules { display:grid; grid-template-columns:1fr; gap:0; max-width:850px; margin:50px 0 0; text-align:left; }
+.rule { display:flex; align-items:center; border-top:0; border-bottom:1px solid rgba(255,255,255,.12); padding:18px 0; color:#e4e0eb; line-height:1.7; }
+.rule b { display:inline-block; flex:0 0 42px; color:#d6a34f; font:700 1rem Arial,sans-serif; margin:0; }
+.join { background:#11151e; display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; }
+.join h2 { font-size:clamp(2.5rem,5vw,4rem); font-weight:400; margin:12px 0; }
+.join p { color:var(--muted); line-height:1.8; }
+form { display:grid; gap:14px; }
+input,select,textarea { width:100%; background:#1c222e; border:1px solid var(--line); color:#fff; padding:15px; font:inherit; border-radius:0; }
+input:focus,select:focus,textarea:focus { outline:1px solid var(--gold); }
+textarea { min-height:100px; resize:vertical; }
+form button { width:max-content; }
+#form-message { color:var(--gold); min-height:24px; }
+footer { display:flex; justify-content:space-between; gap:20px; padding:25px clamp(22px,9vw,130px); border-top:1px solid var(--line); color:var(--muted); font-size:.75rem; letter-spacing:.08em; }
+@media(max-width:800px) { .nav-links { display:none; position:absolute; top:68px; left:0; right:0; padding:22px; background:#11151e; flex-direction:column; align-items:flex-start; } .nav-links.open { display:flex; } .menu { display:block; } .about,.join { grid-template-columns:1fr; gap:38px; } .cards { grid-template-columns:1fr; } .rules { grid-template-columns:1fr; } .seal { width:100px;height:100px;right:7%;bottom:7%; } .seal strong { font-size:1.7rem; } footer { flex-direction:column; } }
+@media(prefers-color-scheme:light) { :root { --site-background:#0d1017; --site-on-background:#f5f0e9; } }
+</style>
+</head>
+<body>
+<div id="app">
+<header class="nav">
+  <a class="brand" href="#accueil"><span>双刀</span> · SŌTŌ DŌJŌ</a>
+  <nav class="nav-links" id="navLinks"><a href="#accueil">Accueil</a><a href="#dojo">Le dojo</a><a href="#disciplines">Enseignements</a><a href="#grades">Grades</a><a href="#code">Règlement</a></nav>
+  <button class="menu" id="menuBtn" aria-label="Ouvrir le menu">☰</button>
+</header>
+<main>
+<section class="hero" id="accueil">
+  <div class="hero-inner"><div class="eyebrow">Discipline · Maîtrise · Détermination</div><h1>La voie de la<br><em>double lame</em></h1><p>Bienvenue au SŌTŌ DŌJŌ, un dojo consacré à l'étude de l'arme à double lame : un manche central et une lame à chaque extrémité. Découvre nos principes, nos disciplines et les étapes de progression dans sa pratique.</p><div class="actions"><a class="btn primary" href="#dojo">Découvrir le dojo</a><a class="btn" href="#inscription">Rejoindre le dojo</a></div></div>
+  <div class="seal"><div><strong>双刃</strong><small>SHIROGANE<br>EST. 2015</small></div></div>
+</section>
+<section class="about" id="dojo">
+  <div class="art-panel" aria-label="Emblème abstrait d'une arme à double lame"><div class="swords">⚔</div></div>
+  <div class="about-copy"><div class="eyebrow">Dojo spécialisé · SŌTŌ DŌJŌ</div><h2>Une arme.<br>Deux extrémités.</h2><p>SŌTŌ DŌJŌ est un dojo consacré à l'étude de l'arme à double lame. Cette arme se compose d'un manche central et de deux lames opposées, une à chaque extrémité.</p><p>Ce document présente l'identité du dojo, les principes de pratique, les disciplines étudiées, les grades et les règles de sécurité qui encadrent l'entraînement.</p><div class="stats"><div class="stat"><strong>01</strong><small>Arme</small></div><div class="stat"><strong>02</strong><small>Lames</small></div><div class="stat"><strong>06</strong><small>Grades</small></div></div></div>
+</section>
+<section class="training" id="disciplines">
+  <div class="section-head"><h2 style="color:#d6a34f">Les enseignements</h2><p>Les disciplines qui composent l'étude de la double lame au sein du dojo.</p></div>
+  <div class="cards">
+    <article class="card"><h3>Fondamentaux</h3><p>Posture, équilibre, prise en main du manche central et familiarisation avec l'arme.</p></article>
+    <article class="card"><h3>Coordination</h3><p>Comprendre le mouvement des deux extrémités et conserver une gestuelle fluide et contrôlée.</p></article>
+    <article class="card"><h3>Contrôle des distances</h3><p>Repères spatiaux, placement et conscience de l'espace autour de l'arme.</p></article>
+    <article class="card"><h3>Mobilité</h3><p>Déplacements, changements d'appui et maintien de l'équilibre avec une arme longue.</p></article>
+    <article class="card"><h3>Endurance</h3><p>Exercices physiques progressifs et maintien du contrôle pendant les séances.</p></article>
+    <article class="card"><h3>Maîtrise avancée</h3><p>Enchaînements chorégraphiés, précision du geste et adaptation dans un cadre sécurisé.</p></article>
+  </div>
+</section>
+<section class="training" id="grades"><div class="section-head"><h2 style="color:#d6a34f">La progression</h2><p>Chaque combattant doit faire ses preuves avant de progresser.</p></div><div class="cards"><article class="card"><h3>Élève</h3><p>Découverte de l'arme, des postures et des règles de sécurité.</p></article><article class="card"><h3>Disciple</h3><p>Premiers exercices de coordination avec la double lame.</p></article><article class="card"><h3>Combattant confirmé</h3><p>Maîtrise du mouvement global et des déplacements contrôlés.</p></article><article class="card"><h3>Expert</h3><p>Enchaînements chorégraphiés et grande précision gestuelle.</p></article><article class="card"><h3>Instructeur</h3><p>Capacité à transmettre les enseignements et encadrer les élèves.</p></article><article class="card"><h3>Maître de la double lame</h3><p>Reconnaissance ultime accordée par le fondateur du dojo.</p></article></div></section>
+<section class="code" id="code"><h2>Le règlement de la double lame</h2><p>Les six principes qui guident chaque pratiquant de cette arme.</p><div class="rules"><div class="rule"><b>01.</b>Respecte le maître, tes partenaires et chaque membre du dojo : la maîtrise commence par le respect.</div><div class="rule"><b>02.</b>Ne prends jamais l'arme sans l'autorisation de l'instructeur.</div><div class="rule"><b>03.</b>Utilise uniquement du matériel d'entraînement adapté et vérifié avant chaque séance.</div><div class="rule"><b>04.</b>Travaille lentement et sous supervision : le contrôle passe avant la vitesse.</div><div class="rule"><b>05.</b>Garde constamment conscience des deux extrémités de l'arme et de l'espace autour de toi.</div><div class="rule"><b>06.</b>Réserve la pratique à un cadre encadré et sécurisé ; jamais pour intimider ou blesser.</div></div></section>
+<section class="join" id="inscription"><div><div class="eyebrow">Adhésion au dojo</div><h2>Rejoins le<br>SŌTŌ DŌJŌ.</h2><p>Le dojo accueille de nouveaux pratiquants. Présente ton nom, ton expérience et tes motivations pour rejoindre l'étude de la double lame. Ce formulaire de démonstration affiche une confirmation locale et n'envoie aucune donnée.</p></div>
+<form id="joinForm"><input name="pseudo" placeholder="Ton nom" required maxlength="32"><select name="voie" required><option value="">Ton niveau de pratique</option><option>Débutant</option><option>Intermédiaire</option><option>Confirmé</option></select><textarea name="motivation" placeholder="Pourquoi souhaites-tu rejoindre le SŌTŌ DŌJŌ ?" required maxlength="400"></textarea><button class="btn primary" type="submit">Envoyer ma demande ↗</button><div id="form-message" role="status" aria-live="polite"></div></form></section>
+</main>
+<footer><span>© SŌTŌ DŌJŌ — DOJO DE LA DOUBLE LAME</span><span>Discipline · Maîtrise · Sécurité</span></footer>
+</div>
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+document.getElementById('joinForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const pseudo = String(data.get('pseudo')).trim();
+  document.getElementById('form-message').textContent = `Merci ${pseudo}, ta demande pour rejoindre le SŌTŌ DŌJŌ est enregistrée localement.`;
+  event.currentTarget.reset();
+});
+</script>
+</body>
+</html>
